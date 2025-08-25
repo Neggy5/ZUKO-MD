@@ -18,7 +18,7 @@
 
 > 1:  🎨 **Fork the Repository**
 
-_Click the button below to fork June Md repository to your GitHub account_
+_Click the button below to fork Zuko md repository to your GitHub account_
 [![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Tap+fork+button+Bellow+To+Fork;June+MD+REPO+On+Github&color=FFD700)](https://git.io/typing-svg)
 <div align="left">
   <a href="https://github.com/Neggy5/ZUKO-MD/fork">
