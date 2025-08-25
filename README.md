@@ -2,27 +2,121 @@
 
 <div align="center"> 
   <a href="https://git.io/typing-svg"> 
-    <img src="https://readme-typing-svg.demolab.com?font=Rockwell&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=ZUKO-MD;Multi+Device+Whatsapp+Bot;Made+By+Zuko" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Rockwell&size=50&pause=1000&color=FF69B4&center=true&width=910&height=100&lines=ZUKO-MD;Multi+Device+Whatsapp+Bot;Made+By+Zuko" alt="Typing SVG" />
   </a> 
 </div> 
 
 <div align="center"> 
   <a href=""> 
-    <img src="https://files.catbox.moe/bvfgoc.jpg" alt="ZUKO MD" height="300"> 
+    <img src="https://files.catbox.moe/bvfgoc.jpg" alt="ZUKO MD" height="300" style="border: 5px solid #33FF00; border-radius: 20px;"> 
   </a> 
 </div>
 
 ---
 
->  🇳🇬 **DEPLOMENT & STEPS** 🇳🇬
+>  🌈 **DEPLOYMENT & STEPS** 🌈
 
-> 1:  **Fork the Repository**
+> 1:  🎨 **Fork the Repository**
 
-_Click the button below to fork  June Md repository to your GitHub account_
-[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Tap+fork+button+Bellow+To+Fork;June+MD+REPO+On+Github)](https://git.io/typing-svg)
+_Click the button below to fork June Md repository to your GitHub account_
+[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Tap+fork+button+Bellow+To+Fork;June+MD+REPO+On+Github&color=FFD700)](https://git.io/typing-svg)
 <div align="left">
   <a href="https://github.com/Neggy5/ZUKO-MD/fork">
-    <img src="https://img.shields.io/badge/Fork%20Bot%20Repo-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=darkblue&color=darkblue" alt="FORK REPO"/>
+    <img src="https://img.shields.io/badge/Fork%20Bot%20Repo-FF00FF?style=for-the-badge&logo=scan&logoColor=white&labelColor=yellow&color=orange" alt="FORK REPO"/>
+  </a>
+</div>
+
+> 2:  🟢 **Get Pair Code**
+
+_Deploy the bot and easily connect it to your WhatsApp account by pair code below 🥈_
+
+> *get Creds.json*
+<div align="left">
+  <a href="https://knight-bot-paircode.onrender.com/" target="_blank">
+    <img src="https://img.shields.io/badge/Pair%20Code%20Server1-00FFB9?style=for-the-badge&logo=scan&logoColor=white&labelColor=purple&color=lime" alt="PAIR CODE"/>
+  </a>
+</div>
+
+> *get session_id*
+<div align="left">
+  <a href="https://knight-bot-paircode.onrender.com/" target="_blank">
+    <img src="https://img.shields.io/badge/Pair%20Code%20Server2-FFD700?style=for-the-badge&logo=scan&logoColor=white&labelColor=blue&color=orange" alt="PAIR"/>
+  </a>
+</div>
+
+> 3: 🟣 **DOWNLOAD BOT ZIP**
+
+_Download Bot Zip file From the button below_
+<p align="left">
+    <a href="https://codeload.github.com/Neggy5/ZUKO-MD/zip/refs/heads/main" target="_blank">
+        <img alt="Download zip" src="https://img.shields.io/badge/Download Zip-FF69B4?style=for-the-badge&logo=scan&logoColor=white&labelColor=purple&color=purple"/>
+    </a>
+</p>
+
+> 4:  🚀 **Deploy Now**
+
+_For further setup & guidance, click the button below🩹_
+[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Deploy+On+Your+Favorite+Panel!&color=00FFFF)](https://git.io/typing-svg)
+
+> **Deploy Now on Heroku**
+
+<h4 align="left" style="color:#FF69B4;">1. Heroku</h4>
+<p align="left">
+<a href='https://dashboard.heroku.com/new?template=https://github.com/Neggy5/ZUKO-MD' target="_blank"><img alt='Heroku' src='https://img.shields.io/badge/-heroku ‎ deploy-FF004D?style=for-the-badge&logo=heroku&logoColor=white'/></a>
+</p>
+
+> **Deploy Now on Below Panel**
+<div align="left">
+  <a href="https://bot-hosting.net/?aff=1068419752923508776">
+    <img src="https://img.shields.io/badge/Bothosting Panel-28a745?style=for-the-badge&logo=server&logoColor=white" alt="PANEL"/>
+  </a><br>
+</div>
+  
+> **Deploy on SolarHosting panel**
+
+<div align="left">
+<a href="https://account.solarhosting.cc/" target="_blank">
+  <img src="https://img.shields.io/badge/Solar_Hosting-FF6B6B?style=for-the-badge&logo=server&logoColor=white" alt="Solar Hosting"/>
+</a>
+</div>
+
+> **Deploy on Dakicc panel**
+<div align="left">
+<a href="https://daki.cc" target="_blank">
+  <img src="https://img.shields.io/badge/Daki_CC PANEL-34495E?style=for-the-badge&logo=server&logoColor=orange" alt="Daki CC"/>
+</a>
+</div>
+
+> **Deploy on Optiklink**
+
+<div align="left">
+<a href="https://optiklink.com/" target="_blank">
+  <img src="https://img.shields.io/badge/Optik_Link_panel-2ECC71?style=for-the-badge&logo=server&logoColor=yellow" alt="Optik Link"/>
+</a>
+</div>
+
+>  **Deploy On Katabump panel**
+
+<div align="left">
+<a href="https://dashboard.katabump.com/auth/login#adc462" target="_blank"><br>
+  <img src="https://img.shields.io/badge/Katabump panel-D6B7D6?style=for-the-badge&logo=server&logoColor=lightblue" alt="KATABUMP"/>
+</a>
+</div>
+
+---
+
+>  🎉 **JOIN US**
+<div align="left">
+  <a href="https://t.me/Zukotech 001">
+    <img src="https://img.shields.io/badge/Join%20Telegram-0078E7?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Telegram"/>
+  </a>
+<br>
+  <a href="https://chat.whatsapp.com/GJRib0T442sEhC1YW0Dj8P?mode=ac_t">
+    <img src="https://img.shields.io/badge/Join%20WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WHATSAPP"/>
+  </a>
+</div>
+
+---    <img src="https://img.shields.io/badge/Fork%20Bot%20Repo-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=darkblue&color=darkblue" alt="FORK REPO"/>
   </a>
 </div>
 
