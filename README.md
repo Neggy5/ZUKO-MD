@@ -19,7 +19,7 @@
 > 1:  🎨 **Fork the Repository**
 
 _Click the button below to fork Zuko md repository to your GitHub account_
-[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Tap+fork+button+Bellow+To+Fork;June+MD+REPO+On+Github&color=FFD700)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Tap+fork+button+Bellow+To+Fork;Zuko+MD+REPO+On+Github&color=FFD700)](https://git.io/typing-svg)
 <div align="left">
   <a href="https://github.com/Neggy5/ZUKO-MD/fork">
     <img src="https://img.shields.io/badge/Fork%20Bot%20Repo-FF00FF?style=for-the-badge&logo=scan&logoColor=white&labelColor=yellow&color=orange" alt="FORK REPO"/>
