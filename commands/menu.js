@@ -65,43 +65,31 @@ export default {
 ┃
 ┃ 📚 *Command Categories*
 ┃ ┣━━━━━━━━━━━━━━━━━
-┃ ┣ 🎮 *General Commands* (12)
-┃ ┣ 🛡️ *Anti-Spam/Protection* (6)
-┃ ┣ 🔧 *Group Management* (8)
-┃ ┣ 📖 *Religious Commands* (2)
-┃ ┣ 📥 *Downloader Commands* (6)
-┃ ┣ 🎬 *Reaction Commands* (25+)
-┃ ┣ 👑 *Owner Commands* (4)
-┃ ┗━━━━━━━━━━━━━━━━━
-┃
-┃ 📢 *WhatsApp Channel*
-┃ ┣━━━━━━━━━━━━━━━━━
-┃ ┣ 🔔 Join for updates & support
+┃ ┣ 🎮 *General Commands*
+┃ ┣ 🛡️ *Anti-Spam/Protection*
+┃ ┣ 🔧 *Group Management*
+┃ ┣ 📖 *Religious Commands*
+┃ ┣ 📥 *Downloader Commands*
+┃ ┣ 🎬 *Reaction Commands*
+┃ ┣ 🎮 *Games*
 ┃ ┗━━━━━━━━━━━━━━━━━
 ╰━━━━━━━━━━━━━━━━━━━━━╯
 
-*📢 Join our WhatsApp Channel for latest updates!*
+*📢 Join our WhatsApp Channel for updates!*
 > Tap the button below to join`;
 
-        // Create buttons with categories
+        // Create buttons with categories (NO ABOUT or STATS buttons)
         const menuButtons = [
             { text: '🎮 GENERAL', id: 'menu_general', type: 'reply' },
             { text: '🛡️ ANTI-SPAM', id: 'menu_antispam', type: 'reply' },
             { text: '🔧 GROUP', id: 'menu_group', type: 'reply' },
             { text: '📖 RELIGIOUS', id: 'menu_religious', type: 'reply' },
             { text: '📥 DOWNLOADER', id: 'menu_downloader', type: 'reply' },
-            { text: '🎬 REACTIONS', id: 'menu_reactions', type: 'reply' }
+            { text: '🎬 REACTIONS', id: 'menu_reactions', type: 'reply' },
+            { text: '🎮 GAMES', id: 'menu_games', type: 'reply' },
+            { text: '👑 OWNER', id: 'menu_owner', type: 'reply' },
+            { text: '📢 CHANNEL', id: 'menu_channel', type: 'reply' }
         ];
-        
-        if (isOwner) {
-            menuButtons.push({ text: '👑 OWNER', id: 'menu_owner', type: 'reply' });
-        }
-        
-        menuButtons.push(
-            { text: '📢 CHANNEL', id: 'menu_channel', type: 'reply' },
-            { text: 'ℹ️ ABOUT', id: 'menu_about', type: 'reply' },
-            { text: '📊 STATS', id: 'menu_stats', type: 'reply' }
-        );
         
         // Send menu with image if available
         if (botImageBuffer) {

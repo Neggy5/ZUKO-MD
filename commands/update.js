@@ -17,7 +17,7 @@ const execPromise = util.promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// GitHub repository info
+// GitHub repository info - CHANGE THESE TO YOUR REPO
 const REPO_OWNER = 'Neggy5';
 const REPO_NAME = 'ZUKO-MD';
 const BRANCH = 'main';
@@ -25,6 +25,9 @@ const BRANCH = 'main';
 // Paths
 const TEMP_DIR = path.join(__dirname, '../temp');
 const BACKUP_DIR = path.join(__dirname, '../backup');
+
+// Store update status
+let isUpdating = false;
 
 export default {
     name: 'update',
@@ -42,6 +45,12 @@ export default {
         }
         
         const action = args[0]?.toLowerCase();
+        
+        // Check if already updating
+        if (isUpdating) {
+            await reply('⚠️ Update already in progress! Please wait.');
+            return;
+        }
         
         // Check for status
         if (action === 'status') {
@@ -93,18 +102,20 @@ async function showUpdateStatus(from, sock, msg, buttons) {
         // Get current commit hash
         let currentCommit = 'Unknown';
         try {
-            const { stdout } = await execPromise('git rev-parse --short HEAD');
+            const { stdout } = await execPromise('git rev-parse --short HEAD 2>/dev/null || echo "unknown"');
             currentCommit = stdout.trim();
-        } catch (e) {}
+        } catch (e) {
+            currentCommit = 'Git not available';
+        }
         
         // Get latest commit from GitHub
         const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits/${BRANCH}`;
-        const response = await axios.get(apiUrl);
+        const response = await axios.get(apiUrl, { timeout: 10000 });
         const latestCommit = response.data.sha.substring(0, 7);
         const latestDate = new Date(response.data.commit.author.date).toLocaleString();
         const commitMessage = response.data.commit.message.split('\n')[0];
         
-        const needsUpdate = currentCommit !== latestCommit && currentCommit !== 'Unknown';
+        const needsUpdate = currentCommit !== latestCommit && currentCommit !== 'Unknown' && currentCommit !== 'Git not available';
         
         await buttons.sendButtons(from, {
             text: `📊 *ＵＰＤＡＴＥ ＳＴＡＴＵＳ* 📊\n\n` +
@@ -136,6 +147,13 @@ async function showUpdateStatus(from, sock, msg, buttons) {
 
 // Perform the update
 async function performUpdate(from, sock, msg, buttons) {
+    if (isUpdating) {
+        await sock.sendMessage(from, { text: '⚠️ Update already in progress!' });
+        return;
+    }
+    
+    isUpdating = true;
+    
     try {
         await sock.sendMessage(from, {
             text: `🔄 *ＵＰＤＡＴＩＮＧ ＺＵＫＯ ＭＤ* 🔄\n\n` +
@@ -144,12 +162,10 @@ async function performUpdate(from, sock, msg, buttons) {
                   `⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴢᴜᴋᴏ ᴍᴅ ⚡`
         }, { quoted: msg });
         
-        // Create backup directory
+        // Create directories
         if (!fs.existsSync(BACKUP_DIR)) {
             fs.mkdirSync(BACKUP_DIR, { recursive: true });
         }
-        
-        // Create temp directory
         if (!fs.existsSync(TEMP_DIR)) {
             fs.mkdirSync(TEMP_DIR, { recursive: true });
         }
@@ -159,26 +175,41 @@ async function performUpdate(from, sock, msg, buttons) {
         const backupCommandsPath = path.join(BACKUP_DIR, `commands_backup_${Date.now()}`);
         if (fs.existsSync(commandsPath)) {
             await execPromise(`cp -r "${commandsPath}" "${backupCommandsPath}"`);
+            console.log('✅ Commands backed up');
+        }
+        
+        // Backup handler.js
+        const handlerPath = path.join(__dirname, '..', 'handler.js');
+        const backupHandlerPath = path.join(BACKUP_DIR, `handler_backup_${Date.now()}.js`);
+        if (fs.existsSync(handlerPath)) {
+            await execPromise(`cp "${handlerPath}" "${backupHandlerPath}"`);
+            console.log('✅ Handler backed up');
         }
         
         // Download latest code from GitHub
         const downloadUrl = `https://github.com/${REPO_OWNER}/${REPO_NAME}/archive/refs/heads/${BRANCH}.zip`;
         const zipPath = path.join(TEMP_DIR, 'update.zip');
         
+        console.log('📥 Downloading update...');
         const response = await axios({
             method: 'get',
             url: downloadUrl,
-            responseType: 'arraybuffer'
+            responseType: 'arraybuffer',
+            timeout: 60000
         });
         
         fs.writeFileSync(zipPath, Buffer.from(response.data));
+        console.log('✅ Download complete');
         
         // Extract zip
         const zip = new AdmZip(zipPath);
         const extractPath = path.join(TEMP_DIR, 'extracted');
+        if (fs.existsSync(extractPath)) {
+            await execPromise(`rm -rf "${extractPath}"`);
+        }
         zip.extractAllTo(extractPath, true);
         
-        // Find the extracted folder (it will be like ZUKO-MD-main)
+        // Find the extracted folder
         const extractedFolders = fs.readdirSync(extractPath).filter(f => 
             fs.statSync(path.join(extractPath, f)).isDirectory()
         );
@@ -187,10 +218,9 @@ async function performUpdate(from, sock, msg, buttons) {
         // Update commands folder
         const newCommandsPath = path.join(extractedRepoPath, 'commands');
         if (fs.existsSync(newCommandsPath)) {
-            // Remove old commands
             await execPromise(`rm -rf "${commandsPath}"`);
-            // Copy new commands
             await execPromise(`cp -r "${newCommandsPath}" "${commandsPath}"`);
+            console.log('✅ Commands updated');
         }
         
         // Update utils folder
@@ -199,20 +229,30 @@ async function performUpdate(from, sock, msg, buttons) {
         if (fs.existsSync(newUtilsPath)) {
             await execPromise(`rm -rf "${utilsPath}"`);
             await execPromise(`cp -r "${newUtilsPath}" "${utilsPath}"`);
+            console.log('✅ Utils updated');
         }
         
-        // Update handler.js if exists
-        const handlerPath = path.join(__dirname, '..', 'handler.js');
+        // Update handler.js
         const newHandlerPath = path.join(extractedRepoPath, 'handler.js');
         if (fs.existsSync(newHandlerPath)) {
             await execPromise(`cp "${newHandlerPath}" "${handlerPath}"`);
+            console.log('✅ Handler updated');
         }
         
-        // Update index.js if exists
+        // Update index.js
         const indexPath = path.join(__dirname, '..', 'index.js');
         const newIndexPath = path.join(extractedRepoPath, 'index.js');
         if (fs.existsSync(newIndexPath)) {
             await execPromise(`cp "${newIndexPath}" "${indexPath}"`);
+            console.log('✅ Index updated');
+        }
+        
+        // Update config.js if exists
+        const configPath = path.join(__dirname, '..', 'config.js');
+        const newConfigPath = path.join(extractedRepoPath, 'config.js');
+        if (fs.existsSync(newConfigPath)) {
+            // Don't overwrite config to preserve owner numbers
+            console.log('⚠️ Skipping config.js update to preserve settings');
         }
         
         // Cleanup temp files
@@ -233,11 +273,14 @@ async function performUpdate(from, sock, msg, buttons) {
         
         // Restart bot after 5 seconds
         setTimeout(() => {
+            console.log('🔄 Restarting bot...');
             process.exit(0);
         }, 5000);
         
     } catch (error) {
         console.error('Update error:', error);
+        isUpdating = false;
+        
         await sock.sendMessage(from, {
             text: `❌ *ＵＰＤＡＴＥ ＦＡＩＬＥＤ* ❌\n\n` +
                   `Error: ${error.message}\n\n` +
@@ -249,11 +292,18 @@ async function performUpdate(from, sock, msg, buttons) {
 
 // Cancel update
 async function cancelUpdate(from, sock, msg) {
-    await sock.sendMessage(from, {
-        text: `❌ *ＵＰＤＡＴＥ ＣＡＮＣＥＬＬＥＤ* ❌\n\n` +
-              `Update has been cancelled.\n\n` +
-              `⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴢᴜᴋᴏ ᴍᴅ ⚡`
-    }, { quoted: msg });
+    if (isUpdating) {
+        isUpdating = false;
+        await sock.sendMessage(from, {
+            text: `❌ *ＵＰＤＡＴＥ ＣＡＮＣＥＬＬＥＤ* ❌\n\n` +
+                  `Update has been cancelled.\n\n` +
+                  `⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴢᴜᴋᴏ ᴍᴅ ⚡`
+        }, { quoted: msg });
+    } else {
+        await sock.sendMessage(from, {
+            text: `❌ No update in progress.\n\n⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴢᴜᴋᴏ ᴍᴅ ⚡`
+        }, { quoted: msg });
+    }
 }
 
 // Export handler functions for button responses
